@@ -11,7 +11,7 @@ jobs:
           name: Install HTTP
           command: |
             apt update
-            apt-get install apache2
+            apt-get install apache2 -y
             systemctl start httpd.service
 
       - run:
