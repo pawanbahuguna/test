@@ -2,15 +2,15 @@ version: 2
 jobs:
   build:
     docker:
-      - image: centos7
+      - image: debian:stretch
 
     steps:
       - checkout
 
       - run:
-          name: Greeting
+          name: Install HTTP
           command: |
-            sudo yum install -y httpd
+            sudo apt-get install -y httpd
             sudo systemctl start httpd.service
 
       - run:
