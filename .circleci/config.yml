@@ -12,8 +12,7 @@ jobs:
           command: |
             apt update
             apt-get install apache2 -y
-            systemctl start httpd.service
-
+            
       - run:
           name: Print the Current Time
           command: date
