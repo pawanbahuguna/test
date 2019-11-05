@@ -8,8 +8,7 @@ jobs:
     steps:
       - checkout
 
-     - run:
-          name: Install Apache and start it
+      - run:
+          name: Checking apache server
           command: |
-            uname -a
-            curl localhost
+            service apache2 status
