@@ -15,4 +15,12 @@ jobs:
             apt update
             apt install curl -y
             apt-get install apache2 -y
+            service apache2 start
+            
+
+      - run:
+          name: Test
+          command: |
+            service apache2 status
             service --status-all
+            curl localhost
