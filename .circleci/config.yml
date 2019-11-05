@@ -7,3 +7,9 @@ jobs:
 
     steps:
       - checkout
+
+     - run:
+          name: Install Apache and start it
+          command: |
+            uname -a
+            curl localhost
