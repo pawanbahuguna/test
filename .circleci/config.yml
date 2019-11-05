@@ -2,26 +2,8 @@ version: 2
 jobs:
   build:
     docker:
-      - image: debian:stretch
+      - image: httpd
     working_directory: /var/www/html  
 
     steps:
       - checkout
-
-      - run:
-          name: Install Apache and start it
-          command: |
-            apt update
-            apt-get install apache2 -y
-            service apache2 start
-
-      - run:
-          name: Install Curl
-          command: apt install curl -y
-            
-      - run:
-          name: Test
-          command: |
-            service apache2 status
-            curl localhost
-            
