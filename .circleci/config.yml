@@ -12,5 +12,6 @@ jobs:
           name: Checking apache server
           command: |
             uname -a
+            apt install curl -y
             curl localhost
             service --status-all
