@@ -11,4 +11,5 @@ jobs:
       - run:
           name: Checking apache server
           command: |
-            service apache2 status
+            uname -a
+            service httpd status
