@@ -23,4 +23,6 @@ jobs:
           command: |
             service apache2 status
             service --status-all
-            curl localhost
+            curl localhost/random_text.html
+            ls
+            pwd
