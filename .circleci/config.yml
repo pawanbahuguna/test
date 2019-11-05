@@ -14,5 +14,6 @@ jobs:
             uname -a
             apt update
             apt install curl -y
+            service apache2 start
             service --status-all
             curl localhost
