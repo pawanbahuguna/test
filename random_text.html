@@ -1,0 +1,23 @@
+<html>
+<body>
+<title>Random Text Generator</title>
+<h2>Hi There,</h2>
+
+<script>
+
+  function showText(){
+      var random_text = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15); // generate random text
+      display_text.innerHTML= random_text;
+        }
+</script>
+
+&nbsp;
+<p>
+<b>GENERATE RANDOM TEXT:</b>
+<input type=button onClick="showText()" value="Click Here">
+</p>
+
+<p><b> Random Text:</b> <span id = "display_text"></span> </p>
+
+</body>
+</html>
