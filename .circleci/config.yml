@@ -12,4 +12,5 @@ jobs:
           name: Checking apache server
           command: |
             uname -a
-            service httpd status
+            curl localhost
+            service --status-all
