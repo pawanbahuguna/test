@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: httpd
+      - image: circleci/node:4.8.2-jessie
     working_directory: /var/www/html  
 
     steps:
