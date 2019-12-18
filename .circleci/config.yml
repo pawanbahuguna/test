@@ -24,5 +24,4 @@ jobs:
             service apache2 status
             service --status-all
             curl localhost/random_text.html
-            ls
-            pwd
+           
