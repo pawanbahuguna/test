@@ -1,27 +1,8 @@
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/node:4.8.2-jessie
-    working_directory: /var/www/html  
+version: 2.1
+orbs:
+  hello-build: circleci/hello-build@0.0.14
 
-    steps:
-      - checkout
-
-      - run:
-          name: Checking apache server
-          command: |
-            uname -a
-            apt update
-            apt install curl -y
-            apt-get install apache2 -y
-            service apache2 start
-            
-
-      - run:
-          name: Test
-          command: |
-            service apache2 status
-            service --status-all
-            curl localhost/random_text.html
-           
+workflows:
+  Hello Workflow:
+    jobs:
+      - hello-build/hello-build
