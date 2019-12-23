@@ -9,10 +9,10 @@ jobs:
       - image: circleci/node
     steps:
       - slack/notify:
-          message: "This is a custom Test message" # Optional: Enter your own message
+          message: "This is a custom Test message 1" # Optional: Enter your own message
           mentions: "UR1R0NBUG," # Optional: Enter the Slack IDs of any user or group (sub_team) to be mentioned
           color: "#42e2f4" # Optional: Assign custom colors for each notification
-          webhook: "webhook" # Optional: Enter a specific webhook here or the default will use $SLACK_WEBHOOK
+          webhook: "https://hooks.slack.com/services/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" # Optional: Enter a specific webhook here or the default will use $SLACK_WEBHOOK
 
 workflows:
   test-workflow:
