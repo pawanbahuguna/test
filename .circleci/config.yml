@@ -9,4 +9,4 @@ jobs:
          name: Running Command
          command: |
            uptime
-           curl $TELEGRAM_WEBHOOK/sendMessage?"chat_id=$CHATID&text=Custom MESSAGE" # Send message to Telegram
+           curl $TELEGRAM_WEBHOOK/sendMessage?"chat_id=$CHATID&text=BUILD_URL: ${CIRCLE_BUILD_URL}, BUILD_NUMBER: ${CIRCLE_BUILD_NUM}, TRIGGERER: ${CIRCLE_USERNAME}" # Send message to Telegram
