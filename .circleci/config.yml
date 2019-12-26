@@ -17,12 +17,4 @@ jobs:
        name: Telegram Notification
        shell: /bin/bash
        command: |
-        # Provide error if no webhook is set and error. Otherwise continue
-        if [ -z "<< parameters.webhook >>" ]; then
-          echo "NO Telegram WEBHOOK SET"
-          echo "Please input your TELEGRAM_WEBHOOK value either in the settings for this project, or as a parameter for this orb."
-          exit 1
-          else
-          # Webhook properly set.
-          echo Notifying Telegram Channel
         curl -X POST -H 'Content-type: application/json' $TELEGRAM_WEBHOOK/sendMessage?"chat_id=$CHATID&text=$TELEGRAM_MESSAGE"
