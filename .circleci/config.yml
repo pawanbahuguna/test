@@ -3,9 +3,16 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/ubuntu 
+      - image: circleci/ubuntu
+    parameters:
+      webhook:
+       description: Enter either your Webhook value or use the CircleCI UI to add your token under the 'TELEGRAM_WEBHOOK' env var
+       type: string
+       default: ${TELEGRAM_WEBHOOK}  
 
   steps:
+    - checkout
+
     - run:
       name: Provide error if non-bash shell
       command: |
