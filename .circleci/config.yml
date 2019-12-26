@@ -1,5 +1,4 @@
-version: 2.1
-  
+version: 2
 jobs:
   build:
     docker:
@@ -12,4 +11,4 @@ jobs:
        name: Telegram Notification
        shell: /bin/bash
        command: |
-        curl https://api.telegram.org/bot1018984028:AAFo0hT75GJHrMITJi1CsKczSBZCm5K17xE/sendMessage?"chat_id=-391113057&text=config"
+        uptime
