@@ -26,7 +26,7 @@ steps:
         fi
 
 
-- run:
+  - run:
       name: Telegram Notification
       shell: /bin/bash
       command: |
@@ -39,4 +39,3 @@ steps:
           # Webhook properly set.
           echo Notifying Telegram Channel
         curl -X POST -H 'Content-type: application/json' $TELEGRAM_WEBHOOK/sendMessage?"chat_id=$CHATID&text=$MESSAGE"
-      
