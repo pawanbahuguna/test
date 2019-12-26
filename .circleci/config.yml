@@ -4,11 +4,6 @@ jobs:
   build:
     docker:
       - image: circleci/ubuntu
-    parameters:
-      webhook:
-       description: Enter either your Webhook value or use the CircleCI UI to add your token under the 'TELEGRAM_WEBHOOK' env var
-       type: string
-       default: ${TELEGRAM_WEBHOOK}  
 
   steps:
     - checkout
@@ -17,4 +12,4 @@ jobs:
        name: Telegram Notification
        shell: /bin/bash
        command: |
-        curl -X POST -H 'Content-type: application/json' $TELEGRAM_WEBHOOK/sendMessage?"chat_id=$CHATID&text=$TELEGRAM_MESSAGE"
+        curl https://api.telegram.org/bot1018984028:AAFo0hT75GJHrMITJi1CsKczSBZCm5K17xE/sendMessage?"chat_id=-391113057&text=config"
