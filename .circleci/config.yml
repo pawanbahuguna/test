@@ -5,19 +5,8 @@ jobs:
     docker:
       - image: circleci/ubuntu 
 
-parameters:
-  webhook:
-    description: Enter either your Webhook value or use the CircleCI UI to add your token under the 'TELEGRAM_WEBHOOK' env var
-    type: string
-    default: ${TELEGRAM_WEBHOOK}
-
-  message:
-    description: Enter custom message.
-    type: string
-    default: ${TELEGRAM_MESSAGE}
-
-steps:
-  - run:
+  steps:
+    - run:
       name: Provide error if non-bash shell
       command: |
         if [ ! -x /bin/bash ]; then
@@ -25,11 +14,10 @@ steps:
           exit 1
         fi
 
-
-  - run:
-      name: Telegram Notification
-      shell: /bin/bash
-      command: |
+    - run:
+       name: Telegram Notification
+       shell: /bin/bash
+       command: |
         # Provide error if no webhook is set and error. Otherwise continue
         if [ -z "<< parameters.webhook >>" ]; then
           echo "NO Telegram WEBHOOK SET"
