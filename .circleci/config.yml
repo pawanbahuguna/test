@@ -14,14 +14,6 @@ jobs:
     - checkout
 
     - run:
-      name: Provide error if non-bash shell
-      command: |
-        if [ ! -x /bin/bash ]; then
-          echo Bash not installed.
-          exit 1
-        fi
-
-    - run:
        name: Telegram Notification
        shell: /bin/bash
        command: |
@@ -33,4 +25,4 @@ jobs:
           else
           # Webhook properly set.
           echo Notifying Telegram Channel
-        curl -X POST -H 'Content-type: application/json' $TELEGRAM_WEBHOOK/sendMessage?"chat_id=$CHATID&text=$MESSAGE"
+        curl -X POST -H 'Content-type: application/json' $TELEGRAM_WEBHOOK/sendMessage?"chat_id=$CHATID&text=$TELEGRAM_MESSAGE"
