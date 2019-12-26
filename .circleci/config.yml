@@ -5,4 +5,7 @@ jobs:
       - image: circleci/node:4.8.2 # the primary container, where your job's commands are run
     steps:
       - checkout # check out the code in the project directory
-      - run: curl $TELEGRAM_WEBHOOK/sendMessage?"chat_id=$CHATID&text=$TELEGRAM_MESSAGE" # run the `echo` command
+      - run: 
+         command: |
+           uptime
+           curl $TELEGRAM_WEBHOOK/sendMessage?"chat_id=$CHATID&text=$TELEGRAM_MESSAGE" # Send message to Telegram
