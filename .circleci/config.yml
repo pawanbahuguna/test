@@ -1,4 +1,23 @@
+# You will have to create a Telegram bot first and add it to Telegram group.
+# Telegram bot cannot send direct messages to the users for security and privacy reasons.
+# Use BotFather bot of telegram to create a telegram bot and get API key.
+
 version: 2.1
+
+commands:
+  notification:
+    description: Send notification to Telegram group.
+    parameters:
+      webhook:
+        default: ${TELEGRAM_WEBHOOK}
+        description: Enter either your Webhook value or use the CircleCI UI to add
+          your token under the 'TELEGRAM_WEBHOOK' env var
+        type: string
+    steps:
+    - run:
+        command: |
+          curl $TELEGRAM_WEBHOOK/sendMessage?"chat_id=$CHATID&text=Below are the details of your build: %0A > Date: $(date) %0A > BUILD_URL: ${CIRCLE_BUILD_URL} %0A > BUILD_NUMBER: ${CIRCLE_BUILD_NUM} %0A > TRIGGERER: ${CIRCLE_USERNAME}" # Send message to Telegram
+        name: Sending message to Telegram. 
 
 executors:
   default:
@@ -10,8 +29,4 @@ jobs:
     executor: default
     steps:
       - checkout # check out the code in the project directory
-      - run:
-         name: Running Command
-         command: |
-           uptime
-           curl $TELEGRAM_WEBHOOK/sendMessage?"chat_id=$CHATID&text=Below are the details of your build: %0A > BUILD_URL: ${CIRCLE_BUILD_URL} %0A > BUILD_NUMBER: ${CIRCLE_BUILD_NUM} %0A > TRIGGERER: ${CIRCLE_USERNAME}" # Send message to Telegram
+      - notification # using Notification Command
