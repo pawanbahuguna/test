@@ -17,7 +17,7 @@ commands:
     - run:
         command: |
           temoji=%E2%9C%85
-          curl $TELEGRAM_WEBHOOK/sendMessage?"chat_id=$CHATID&text=Below are the details of your build: %0A %F0%9F%95%9C Date: $(date) %0A $temoji BUILD_URL: ${CIRCLE_BUILD_URL} %0A $temoji BUILD_NUMBER: ${CIRCLE_BUILD_NUM} %0A $temoji TRIGGERER: ${CIRCLE_USERNAME}"
+          curl -X POST -H 'Content-type: application/json' $TELEGRAM_WEBHOOK/sendMessage?"chat_id=$CHATID&text=%F0%9F%94%89 Below are the details of your build: %0A %F0%9F%95%9C Date: $(date) %0A $temoji BUILD_URL: ${CIRCLE_BUILD_URL} %0A $temoji BUILD_NUMBER: ${CIRCLE_BUILD_NUM} %0A $temoji TRIGGERER: ${CIRCLE_USERNAME}"
         name: Sending message to Telegram. 
 
 executors:
