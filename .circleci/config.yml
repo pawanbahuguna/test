@@ -1,6 +1,7 @@
 # You will have to create a Telegram bot first and add it to Telegram group.
 # Telegram bot cannot send direct messages to the users for security and privacy reasons.
-# Use BotFather bot of telegram to create a telegram bot and get API key.
+# Use BotFather bot from telegram to create a telegram bot and get API key.
+# You will also need group ID to post in the desired group.
 
 version: 2.1
 
