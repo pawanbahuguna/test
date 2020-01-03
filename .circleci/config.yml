@@ -16,13 +16,12 @@ commands:
     steps:
     - run:
        command: |
-        # Provide error if no webhook is set and error. Otherwise continue
+          # Provide error if no webhook is set and error. Otherwise continue
           if [ -z "<< parameters.webhook >>" ]; then
             echo "NO Telegram WEBHOOK SET"
-            echo "Please input your TELEGRAM_WEBHOOK value either in the settings for this project, or as a parameter for this orb."
-            exit 1
+            echo "Please input your TELEGRAM_WEBHOOK value either in the settings for this project, or as a parameter for this orb." && exit 1
           else
-          curl $TELEGRAM_WEBHOOK/sendMessage?"chat_id=$CHATID&text=Below are the details of your build: %0A > Date: $(date) %0A > BUILD_URL: ${CIRCLE_BUILD_URL} %0A > BUILD_NUMBER: ${CIRCLE_BUILD_NUM} %0A > TRIGGERER: ${CIRCLE_USERNAME}" # Send message to Telegram
+          curl << parameters.webhook >>/sendMessage?"chat_id=$CHATID&text=Below are the details of your build: %0A %F0%9F%95%9C Date: $(date) %0A $temoji BUILD_URL: ${CIRCLE_BUILD_URL} %0A $temoji BUILD_NUMBER: ${CIRCLE_BUILD_NUM} %0A $temoji TRIGGERER: ${CIRCLE_USERNAME}"
           fi
         name: Sending message to Telegram. 
 
