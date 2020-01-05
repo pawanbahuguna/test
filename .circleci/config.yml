@@ -46,4 +46,5 @@ jobs:
     executor: default
     steps:
       - checkout # check out the code in the project directory
-      - notification # using Notification Command
+      - notification: # using Notification Command
+          message: This is test message.
