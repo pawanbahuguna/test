@@ -145,7 +145,7 @@ commands:
                   echo '"fail_only" is set to "true". No TELEGRAM notification sent.'
                 else
                   temoji=%E2%9C%85
-                  curl << parameters.webhook >>/sendMessage?"chat_id=<< parameters.channel >>&text=%F0%9F%94%89 Below are the details of your build: %0A %F0%9F%95%9C Date: $(date) %0A $temoji Job Number: $CIRCLE_BUILD_NUM %0A $temoji TRIGGERER: ${CIRCLE_USERNAME} %0A %F0%9F%93%8B MESSAGE: << parameters.success_message >> %0A BUILD_URL: ${CIRCLE_BUILD_URL} %0A"
+                  curl << parameters.webhook >>/sendMessage?"chat_id=<< parameters.channel >>&text=%F0%9F%94%89 Build Succeeded: Please check details below: %0A %F0%9F%95%9C Date: $(date) %0A $temoji Job Number: $CIRCLE_BUILD_NUM %0A $temoji TRIGGERER: ${CIRCLE_USERNAME} %0A %F0%9F%93%8B MESSAGE: << parameters.success_message >> %0A BUILD_URL: ${CIRCLE_BUILD_URL} %0A"
                   echo "Job completed successfully. Alert sent."
                 fi
               else
