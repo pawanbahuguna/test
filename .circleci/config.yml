@@ -46,5 +46,4 @@ jobs:
     executor: default
     steps:
       - checkout # check out the code in the project directory
-      - notification: # using Notification Command
-          message: Another test with emoji. 
+      - notification # using Notification Command
