@@ -1,7 +1,8 @@
 # You will have to create a Telegram bot first and add it to Telegram group.
 # Telegram bot cannot send direct messages to the users for security and privacy reasons.
-# Use BotFather bot from telegram to create a telegram bot and get API key.
-# You will also need group ID to post in the desired group.
+# Use BotFather bot of telegram to create a telegram bot and get API key.
+# Author: Pawan Bahuguna
+# Verision: 1.0
 
 version: 2.1
 
@@ -19,6 +20,10 @@ commands:
         description: Enter either your Telegram Group ID value or use the CircleCI UI to add
           your token under the 'TELEGRAM_GROUPID' env var
         type: string
+      message:
+        default: ""
+        description: Enter your custom message. This is optional.
+        type: string
     steps:
     - run:
        name: Sending message to Telegram group.
@@ -28,7 +33,7 @@ commands:
             echo "Please input your TELEGRAM_WEBHOOK value either in the settings for this project, or as a parameter for this orb." && exit 1
           else
           temoji=%E2%9C%85
-          curl << parameters.webhook >>/sendMessage?"chat_id=<< parameters.groupid >>&text=%F0%9F%94%89 Below are the details of your build: %0A %F0%9F%95%9C Date: $(date) %0A $temoji BUILD_URL: ${CIRCLE_BUILD_URL} %0A $temoji BUILD_NUMBER: ${CIRCLE_BUILD_NUM} %0A $temoji TRIGGERER: ${CIRCLE_USERNAME}"
+          curl << parameters.webhook >>/sendMessage?"chat_id=<< parameters.groupid >>&text=%F0%9F%94%89 Below are the details of your build: %0A %F0%9F%95%9C Date: $(date) %0A $temoji BUILD_URL: ${CIRCLE_BUILD_URL} %0A $temoji BUILD_NUMBER: ${CIRCLE_BUILD_NUM} %0A $temoji TRIGGERER: ${CIRCLE_USERNAME} %0A << parameters.message >>"
           fi
          
 executors:
