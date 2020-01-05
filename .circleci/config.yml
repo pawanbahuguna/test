@@ -36,35 +36,19 @@ commands:
           curl << parameters.webhook >>/sendMessage?"chat_id=<< parameters.groupid >>&text=%F0%9F%94%89 Below are the details of your build: %0A %F0%9F%95%9C Date: $(date) %0A $temoji BUILD_URL: ${CIRCLE_BUILD_URL} %0A $temoji BUILD_NUMBER: ${CIRCLE_BUILD_NUM} %0A $temoji TRIGGERER: ${CIRCLE_USERNAME} %0A %F0%9F%93%8B MESSAGE: << parameters.message >> %0A"
           fi
   failalert:
-    description: Send fail alert to Telegram group when jobs fail.
+    description: >
+       A handy command to notify a Slack channel on failure in the default master branch
     parameters:
-      webhook:
-        default: ${TELEGRAM_WEBHOOK}
-        description: Enter either your Webhook value or use the CircleCI UI to add
-          your token under the 'TELEGRAM_WEBHOOK' env var
-        type: string
-      groupid:
-        default: ${TELEGRAM_GROUPID}
-        description: Enter Telegram Group ID or use the CircleCI UI to add
-          it under the 'TELEGRAM_GROUPID' env var. Not recommended to mention view orb.
-        type: string
-      fail_message:
-        default: "$CIRCLE_JOB Job Faild, please check Job BUILD URL"
-        description: Enter your custom message. This is optional.
+      only_for_branches:
+        default: ''
+        description: >
+      If set, a comma-separated list of branches for which to send
+      notifications. No spaces.
         type: string
     steps:
     - status:
-      fail_only: true
-    - run:
-       name: Sending fail alert to Telegram group.
-       command: |
-          if [ -z "<< parameters.webhook >>" ]; then
-            echo "NO Telegram WEBHOOK SET"
-            echo "Please input your TELEGRAM_WEBHOOK value either in the settings for this project, or as a parameter for this orb." && exit 1
-          else
-          temoji=%E2%9D%8C
-          curl << parameters.webhook >>/sendMessage?"chat_id=<< parameters.groupid >>&text=%F0%9F%86%98 Below are details of Failed Build: %0A %F0%9F%95%9C Date: $(date) %0A $temoji BUILD_URL: ${CIRCLE_BUILD_URL} %0A $temoji BUILD_NUMBER: ${CIRCLE_BUILD_NUM} %0A $temoji TRIGGERER: ${CIRCLE_USERNAME} %0A %F0%9F%93%8B MESSAGE: << parameters.message >> %0A"
-          fi
+        fail_only: true
+        only_for_branches: <<parameters.only_for_branches>>
 
 executors:
   default:
