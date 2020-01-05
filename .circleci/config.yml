@@ -144,86 +144,15 @@ commands:
                   echo "The job completed successfully"
                   echo '"fail_only" is set to "true". No TELEGRAM notification sent.'
                 else
-                  curl -X POST -H 'Content-type: application/json' \
-                    --data "{ \
-                              <<# parameters.channel >>
-                              \"channel\": \"<< parameters.channel >>\", \
-                              <</ parameters.channel >>
-                              \"attachments\": [ \
-                                { \
-                                  \"fallback\": \"<< parameters.success_message >>\", \
-                                  \"text\": \"<< parameters.success_message >> $TELEGRAM_MENTIONS\", \
-                                  \"fields\": [ \
-                                    <<# parameters.include_project_field >>
-                                    { \
-                                      \"title\": \"Project\", \
-                                      \"value\": \"$CIRCLE_PROJECT_REPONAME\", \
-                                      \"short\": true \
-                                    }, \
-                                    <</ parameters.include_project_field >>
-                                    <<# parameters.include_job_number_field >>
-                                    { \
-                                      \"title\": \"Job Number\", \
-                                      \"value\": \"$CIRCLE_BUILD_NUM\", \
-                                      \"short\": true \
-                                    } \
-                                    <</ parameters.include_job_number_field >>
-                                  ], \
-                                  \"actions\": [ \
-                                    <<# parameters.include_visit_job_action >>
-                                    { \
-                                      \"type\": \"button\", \
-                                      \"text\": \"Visit Job\", \
-                                      \"url\": \"$CIRCLE_BUILD_URL\" \
-                                    } \
-                                    <</ parameters.include_visit_job_action >>
-                                  ], \
-                                  \"color\": \"#1CBF43\" \
-                                } \
-                              ] \
-                            } " << parameters.webhook >>
+                  temoji=%E2%9C%85
+                  curl << parameters.webhook >>/sendMessage?"chat_id=<< parameters.channel >>&text=%F0%9F%94%89 Below are the details of your build: %0A %F0%9F%95%9C Date: $(date) %0A $temoji Job Number: $CIRCLE_BUILD_NUM %0A $temoji BUILD_NUMBER: ${CIRCLE_BUILD_NUM} %0A $temoji TRIGGERER: ${CIRCLE_USERNAME} %0A %F0%9F%93%8B MESSAGE: << parameters.success_message >> %0A"
                   echo "Job completed successfully. Alert sent."
                 fi
               else
                 #If Failed
-                curl -X POST -H 'Content-type: application/json' \
-                  --data "{ \
-                    <<# parameters.channel >>
-                    \"channel\": \"<< parameters.channel >>\", \
-                    <</ parameters.channel >>
-                    \"attachments\": [ \
-                      { \
-                        \"fallback\": \"<< parameters.failure_message >>\", \
-                        \"text\": \"<< parameters.failure_message >> $TELEGRAM_MENTIONS\", \
-                        \"fields\": [ \
-                          <<# parameters.include_project_field >>
-                          { \
-                            \"title\": \"Project\", \
-                            \"value\": \"$CIRCLE_PROJECT_REPONAME\", \
-                            \"short\": true \
-                          }, \
-                          <</ parameters.include_project_field >>
-                          <<# parameters.include_job_number_field >>
-                          { \
-                            \"title\": \"Job Number\", \
-                            \"value\": \"$CIRCLE_BUILD_NUM\", \
-                            \"short\": true \
-                          } \
-                          <</ parameters.include_job_number_field >>
-                        ], \
-                        \"actions\": [ \
-                          <<# parameters.include_visit_job_action >>
-                          { \
-                            \"type\": \"button\", \
-                            \"text\": \"Visit Job\", \
-                            \"url\": \"$CIRCLE_BUILD_URL\" \
-                          } \
-                          <</ parameters.include_visit_job_action >>
-                        ], \
-                        \"color\": \"#ed5c5c\" \
-                      } \
-                    ] \
-                  } " << parameters.webhook >>
+                temoji=%E2%9D%8C
+          curl << parameters.webhook >>/sendMessage?"chat_id=<< parameters.channel >>&text=%F0%9F%94%89 Below are the details of your build: %0A %F0%9F%95%9C Date: $(date) %0A $temoji Job Number: $CIRCLE_BUILD_NUM %0A $temoji BUILD_NUMBER: ${CIRCLE_BUILD_NUM} %0A $temoji TRIGGERER: ${CIRCLE_USERNAME} %0A %F0%9F%93%8B MESSAGE: << parameters.success_message >> %0A"
+          
                 echo "Job failed. Alert sent."
               fi
             fi
