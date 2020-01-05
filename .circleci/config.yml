@@ -19,7 +19,7 @@ commands:
         default: ${TELEGRAM_GROUPID}
         description: Enter Telegram Group ID or use the CircleCI UI to add
           it under the 'TELEGRAM_GROUPID' env var. Not recommended to mention view orb.
-        type: integer
+        type: string
       message:
         default: "Nil"
         description: Enter your custom message. This is optional.
@@ -47,5 +47,5 @@ jobs:
     steps:
       - checkout # check out the code in the project directory
       - notification: # using Notification Command
-          groupid: -396455440 # Not recommended as it will show in build logs. Use variable instead via CircleCI UI.
+          groupid: "-396455440" # Not recommended as it will show in build logs. Use variable instead via CircleCI UI.
           message: Good work team.
