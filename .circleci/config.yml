@@ -244,9 +244,9 @@ jobs:
     executor: default
     steps:
       - checkout # check out the code in the project directory
-      - run: exit 1
+      - run: exit 0
       
       - status:
-         fail_only: true
+         fail_only: false
          only_for_branches: "master"
 
