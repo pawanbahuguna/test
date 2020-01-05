@@ -19,7 +19,7 @@ commands:
         default: ${TELEGRAM_GROUPID}
         description: Enter either your Telegram Group ID value or use the CircleCI UI to add
           your token under the 'TELEGRAM_GROUPID' env var
-        type: string
+        type: integer
       message:
         default: "Nil"
         description: Enter your custom message. This is optional.
