@@ -47,7 +47,7 @@ commands:
         default: ${TELEGRAM_GROUPID}
         description: Enter Telegram Group ID or use the CircleCI UI to add
           it under the 'TELEGRAM_GROUPID' env var. Not recommended to mention view orb.
-        type: integer
+        type: string
       fail_message:
         default: "$CIRCLE_JOB Job Faild, please check Job BUILD URL"
         description: Enter your custom message. This is optional.
