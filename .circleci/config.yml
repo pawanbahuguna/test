@@ -42,8 +42,7 @@ commands:
       only_for_branches:
         default: ''
         description: >
-      If set, a comma-separated list of branches for which to send
-      notifications. No spaces.
+          If set, a comma-separated list of branches for which to sendnotifications. No spaces.
         type: string
     steps:
     - status:
