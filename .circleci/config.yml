@@ -173,11 +173,8 @@ jobs:
     executor: default
     steps:
       - checkout # check out the code in the project directory
-      - run: exit 0
-      - notification: # using Notification Command
-          groupid: "-396455440" # Not recommended as it will show in build logs. Use variable instead via CircleCI UI.
-          message: Testing Status and notification together on different Telegram groups.
+      - run: exit 1
       - status:
-         fail_only: false
+         fail_only: true
          only_for_branches: "master"
 
