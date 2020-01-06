@@ -173,6 +173,5 @@ jobs:
     executor: default
     steps:
       - checkout # check out the code in the project directory
-      - run: exit 1
       - notification
 
