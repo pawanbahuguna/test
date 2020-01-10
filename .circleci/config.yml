@@ -173,7 +173,7 @@ jobs:
     executor: default
     steps:
       - checkout # check out the code in the project directory
-      - run: exit 0
+      - run: exit 1
       - status:
-         fail_only: false
+         fail_only: true
 
