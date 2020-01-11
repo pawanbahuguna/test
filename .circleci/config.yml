@@ -117,13 +117,15 @@ commands:
                   echo '"fail_only" is set to "true". No TELEGRAM notification sent.'
                 else
                   temoji=%E2%9C%85
-                  curl << parameters.webhook >>/sendMessage?"chat_id=<< parameters.channel >>&text=%F0%9F%94%89 Build Succeeded: Please check details below: %0A %F0%9F%95%9C Date: $(date) %0A $temoji Job Number: $CIRCLE_BUILD_NUM %0A $temoji TRIGGERER: ${CIRCLE_USERNAME} %0A %F0%9F%93%8B MESSAGE: << parameters.success_message >> %0A BUILD_URL: ${CIRCLE_BUILD_URL} %0A"
+                  NOPRV="&disable_web_page_preview=true"
+                  curl << parameters.webhook >>/sendMessage?"chat_id=<< parameters.channel >>&text=%F0%9F%94%89 Build Succeeded: Please check details below: %0A %F0%9F%95%9C Date: $(date) %0A $temoji Job Number: $CIRCLE_BUILD_NUM %0A $temoji TRIGGERER: ${CIRCLE_USERNAME} %0A %F0%9F%93%8B MESSAGE: << parameters.success_message >> %0A BUILD_URL: ${CIRCLE_BUILD_URL}${NOPRV} %0A"
                   echo "Job completed successfully. Alert sent."
                 fi
               else
                 #If Failed
                 temoji=%E2%9D%8C
-          curl << parameters.webhook >>/sendMessage?"chat_id=<< parameters.channel >>&text=%F0%9F%9A%A8 Build Failed: Please check details below: %0A %F0%9F%95%9C Date: $(date) %0A $temoji Job Number: $CIRCLE_BUILD_NUM %0A $temoji TRIGGERER: ${CIRCLE_USERNAME} %0A %F0%9F%93%8B MESSAGE: << parameters.failure_message >> %0A BUILD_URL: ${CIRCLE_BUILD_URL} %0A"
+                NOPRV="&disable_web_page_preview=true"
+          curl << parameters.webhook >>/sendMessage?"chat_id=<< parameters.channel >>&text=%F0%9F%9A%A8 Build Failed: Please check details below: %0A %F0%9F%95%9C Date: $(date) %0A $temoji Job Number: $CIRCLE_BUILD_NUM %0A $temoji TRIGGERER: ${CIRCLE_USERNAME} %0A %F0%9F%93%8B MESSAGE: << parameters.failure_message >> %0A BUILD_URL: ${CIRCLE_BUILD_URL}${NOPRV} %0A"
           
                 echo "Job failed. Alert sent."
               fi
@@ -184,5 +186,7 @@ jobs:
       - run: exit 0
       - notification:
           message: Message from test repo. 
+      - status:
+          fail_only: false
       
 
