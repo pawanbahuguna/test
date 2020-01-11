@@ -5,6 +5,7 @@
 # Verision: 1.0.1
 
 version: 2.1
+description: The Aim of this orb is to send notifications to telegram group.
 
 commands:
   notification:
@@ -52,26 +53,6 @@ commands:
       failure_message:
         default: '%F0%9F%98%A2 A $CIRCLE_JOB job has failed!'
         description: Enter custom message.
-        type: string
-      include_job_number_field:
-        default: true
-        description: |
-          Whether or not to include the Job Number field in the message
-        type: boolean
-      include_project_field:
-        default: true
-        description: |
-          Whether or not to include the Project field in the message
-        type: boolean
-      include_visit_job_action:
-        default: true
-        description: |
-          Whether or not to include the Visit Job action in the message
-        type: boolean
-      mentions:
-        default: ""
-        description: |
-          A comma separated list of user IDs. No spaces.
         type: string
       only_for_branches:
         default: ""
@@ -167,13 +148,47 @@ executors:
   default:
     docker:
       - image: circleci/node:latest
+      
+example: 
+  notification:
+    description: 'Send notification to Telegram group with a custom message at any point in a job
+      with this custom step.'
+    usage:
+      jobs:
+        build:
+          executor: default
+          steps:
+          - notification:
+              groupid: "-XXXXXXX" # Not recommended as it will show in build logs. Use variable instead via CircleCI UI.
+              message: Your custom message, default is NIL. Users can be mentioned @username
+      orbs:
+        slack: circleci/slack@x.y.z
+      version: 2.1
+      workflows:
+        your-workflow:
+          jobs:
+          - build
+  status:
+    description: Send a status alert at the end of a job based on success or failure.
+      This must be the last step in a job.
+    usage:
+      jobs:
+        build:
+          executor: default
+          steps:
+            - checkout
+            - run: exit 0
+            - status:
+                fail_only: true
+                only_for_branches: only_for_branches
+      orbs:
+        telgram: circleci/telgram@x.y.z
+      version: 2.1
 
 jobs:
   build:
     executor: default
     steps:
       - checkout # check out the code in the project directory
-      - run: exit 1
-      - status:
-         fail_only: true
+      - notification
 
