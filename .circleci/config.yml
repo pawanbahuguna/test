@@ -105,19 +105,7 @@ commands:
               echo "Please input your TELEGRAM_WEBHOOK value either in the settings for this project, or as a parameter for this orb."
               exit 1
             else
-              #Create Members string
-              if [ -n "<< parameters.mentions >>" ]; then
-                IFS="," read -ra TELEGRAM_MEMBERS \<<< "<< parameters.mentions >>"
-                for i in "${TELEGRAM_MEMBERS[@]}"; do
-                  if [ $(echo ${i} | head -c 1) == "S" ]; then
-                    TELEGRAM_MENTIONS="${TELEGRAM_MENTIONS}<!subteam^${i}> "
-                  elif echo ${i} | grep -E "^(here|channel|everyone)$" > /dev/null; then
-                    TELEGRAM_MENTIONS="${TELEGRAM_MENTIONS}<!${i}> "
-                  else
-                    TELEGRAM_MENTIONS="${TELEGRAM_MENTIONS}<@${i}> "
-                  fi
-                done
-              fi
+
               #If successful
               if [ "$TELEGRAM_BUILD_STATUS" = "success" ]; then
                 #Skip if fail_only
@@ -190,5 +178,6 @@ jobs:
     executor: default
     steps:
       - checkout # check out the code in the project directory
-      - notification
+      - notification:
+          message: Removed mentions as not required.
 
