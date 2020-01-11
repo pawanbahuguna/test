@@ -37,7 +37,7 @@ commands:
           else
           temoji=%E2%84%B9
           NOPRV="&disable_web_page_preview=true"
-          curl -X POST -H 'Content-type: application/json' << parameters.webhook >>/sendMessage?"chat_id=<< parameters.groupid >>&text=%F0%9F%94%89 Below are the details of your build no.: ${CIRCLE_BUILD_NUM} %0A %F0%9F%95%9C Date: $(date) %0A $temoji TRIGGERER: ${CIRCLE_USERNAME} %0A %F0%9F%93%8B MESSAGE: << parameters.message >> %0A $temoji BUILD_URL: ${CIRCLE_BUILD_URL}${NOPRV} %0A"
+          curl -X POST -H 'Content-type: application/json' << parameters.webhook >>/sendMessage?"chat_id=<< parameters.groupid >>&text=%F0%9F%94%89 Below are the details of your build no.: ${CIRCLE_BUILD_NUM} %0A %F0%9F%95%9C Date: $(date) %0A $temoji TRIGGERER: ${CIRCLE_USERNAME} %0A %F0%9F%93%8B MESSAGE: << parameters.message >> %0A %f0%9f%8c%8f BUILD_URL: ${CIRCLE_BUILD_URL}${NOPRV} %0A"
           fi
   status:
     description: |
@@ -118,14 +118,14 @@ commands:
                 else
                   temoji=%E2%9C%85
                   NOPRV="&disable_web_page_preview=true"
-                  curl << parameters.webhook >>/sendMessage?"chat_id=<< parameters.channel >>&text=%F0%9F%94%89 Build Succeeded: Please check details below: %0A %F0%9F%95%9C Date: $(date) %0A $temoji Job Number: $CIRCLE_BUILD_NUM %0A $temoji TRIGGERER: ${CIRCLE_USERNAME} %0A %F0%9F%93%8B MESSAGE: << parameters.success_message >> %0A BUILD_URL: ${CIRCLE_BUILD_URL}${NOPRV} %0A"
+                  curl << parameters.webhook >>/sendMessage?"chat_id=<< parameters.channel >>&text=%F0%9F%94%89 Build Succeeded: Please check details below: %0A %F0%9F%95%9C Date: $(date) %0A $temoji Job Number: $CIRCLE_BUILD_NUM %0A $temoji TRIGGERER: ${CIRCLE_USERNAME} %0A %F0%9F%93%8B MESSAGE: << parameters.success_message >> %0A %f0%9f%8c%8f BUILD_URL: ${CIRCLE_BUILD_URL}${NOPRV} %0A"
                   echo "Job completed successfully. Alert sent."
                 fi
               else
                 #If Failed
                 temoji=%E2%9D%8C
                 NOPRV="&disable_web_page_preview=true"
-          curl << parameters.webhook >>/sendMessage?"chat_id=<< parameters.channel >>&text=%F0%9F%9A%A8 Build Failed: Please check details below: %0A %F0%9F%95%9C Date: $(date) %0A $temoji Job Number: $CIRCLE_BUILD_NUM %0A $temoji TRIGGERER: ${CIRCLE_USERNAME} %0A %F0%9F%93%8B MESSAGE: << parameters.failure_message >> %0A BUILD_URL: ${CIRCLE_BUILD_URL}${NOPRV} %0A"
+          curl << parameters.webhook >>/sendMessage?"chat_id=<< parameters.channel >>&text=%F0%9F%9A%A8 Build Failed: Please check details below: %0A %F0%9F%95%9C Date: $(date) %0A $temoji Job Number: $CIRCLE_BUILD_NUM %0A $temoji TRIGGERER: ${CIRCLE_USERNAME} %0A %F0%9F%93%8B MESSAGE: << parameters.failure_message >> %0A %f0%9f%8c%8f BUILD_URL: ${CIRCLE_BUILD_URL}${NOPRV} %0A"
           
                 echo "Job failed. Alert sent."
               fi
@@ -183,10 +183,10 @@ jobs:
     executor: default
     steps:
       - checkout # check out the code in the project directory
-      - run: exit 0
+      - run: exit 1
       - notification:
           message: Message from test repo. 
       - status:
-          fail_only: false
+          fail_only: true
       
 
