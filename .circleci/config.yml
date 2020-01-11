@@ -36,7 +36,7 @@ commands:
             echo "Please input your TELEGRAM_WEBHOOK value either in the settings for this project, or as a parameter for this orb." && exit 1
           else
           temoji=%E2%84%B9
-          curl << parameters.webhook >>/sendMessage?"chat_id=<< parameters.groupid >>&text=%F0%9F%94%89 Below are the details of your build no.: ${CIRCLE_BUILD_NUM} %0A %F0%9F%95%9C Date: $(date) %0A $temoji BUILD_URL: ${CIRCLE_BUILD_URL}%26disable_web_page_preview=True %0A $temoji TRIGGERER: ${CIRCLE_USERNAME} %0A %F0%9F%93%8B MESSAGE: << parameters.message >> %0A"
+          curl << parameters.webhook >>/sendMessage?"chat_id=<< parameters.groupid >>&text=%F0%9F%94%89 Below are the details of your build no.: ${CIRCLE_BUILD_NUM} %0A %F0%9F%95%9C Date: $(date) %0A $temoji BUILD_URL: ${CIRCLE_BUILD_URL}disable_web_page_preview=True %0A $temoji TRIGGERER: ${CIRCLE_USERNAME} %0A %F0%9F%93%8B MESSAGE: << parameters.message >> %0A"
           fi
   status:
     description: |
