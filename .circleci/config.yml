@@ -11,7 +11,9 @@ description: |
    
 commands:
   notification:
-    description: Send notification to Telegram group when jobs are successful.
+    description: |
+         Send notification to Telegram group when jobs are successful.
+         Only works for successful jobs.
     parameters:
       webhook:
         default: ${TELEGRAM_WEBHOOK}
@@ -183,10 +185,10 @@ jobs:
     executor: default
     steps:
       - checkout # check out the code in the project directory
-      - run: exit 1
+      - run: exit 0
       - notification:
           message: Message from test repo. 
       - status:
-          fail_only: true
+          fail_only: false
       
 
