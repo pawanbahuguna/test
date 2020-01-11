@@ -5,8 +5,10 @@
 # Verision: 1.0.1
 
 version: 2.1
-description: The Aim of this orb is to send notifications to telegram group.
-
+description: |
+   The Aim of this orb is to send notifications to telegram group.
+   Success and failure alerts can also be send using status command.
+   
 commands:
   notification:
     description: Send notification to Telegram group when jobs are successful.
@@ -167,7 +169,7 @@ example:
             - checkout
             - run: exit 0
             - status:
-                fail_only: true
+                fail_only: false
                 only_for_branches: only_for_branches
       orbs:
         telegram: circleci/telegram@x.y.z
@@ -178,6 +180,10 @@ jobs:
     executor: default
     steps:
       - checkout # check out the code in the project directory
+      - run: exit 0
       - notification:
-          message: Removed mentions as not required. Check this @pawanbahuguna 
+          message: Removed mentions as not required. Check this @pawanbahuguna
+      - status:
+          fail_only: false
+      
 
