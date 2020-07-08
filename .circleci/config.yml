@@ -14,7 +14,7 @@ jobs:
           aws-region: AWS_REGION
       - aws-ecr/ecr-login:
           region: AWS_REGION
-          #account-url: AWS_ECR_ACCOUNT_URL
+          account-url: AWS_ECR_ACCOUNT_URL
 workflows:
   version: 2.1
   deploy:
