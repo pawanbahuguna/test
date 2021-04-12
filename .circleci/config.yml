@@ -6,7 +6,7 @@ jobs:
       - image: cimg/python:3.8
     steps:
       - checkout
-      - run: echo "sleep 20"
+      - run: echo "sleep 21"
 
 workflows:
   version: 2
