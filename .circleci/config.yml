@@ -1,16 +1,23 @@
 version: 2
 
-jobs:
-  deploy:
-    docker:
-      - image: cimg/python:3.8
-    steps:
-      - checkout
-      - run: echo "sleep 25"
-
 workflows:
   version: 2
-  deploy:
+  release:
     jobs:
-      - deploy
-      
+     - build
+
+jobs: 
+  build:
+  
+    docker:
+      - image: 241099261431.dkr.ecr.us-east-1.amazonaws.com/pb/test:latest
+        aws_auth:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
+    steps:
+      - checkout
+      - run:
+          name: Run commands
+          command: |
+              pwd
+              ls
