@@ -20,5 +20,4 @@ jobs:
           name: Run commands
           command: |
               pwd
-              ls
               
