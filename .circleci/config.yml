@@ -1,23 +1,11 @@
-version: 2
+version: 2.1
+
+orbs: 
+  node: circleci/node@5.0.2
 
 workflows:
-  version: 2
-  release:
+  test_my_app:
     jobs:
-     - build
+     - node/test:
+         version: 13.11.0
 
-jobs: 
-  build:
-  
-    docker:
-      - image: 241099261431.dkr.ecr.us-east-1.amazonaws.com/pb/test:latest
-        aws_auth:
-          aws_access_key_id: $AWS_ACCESS_KEY_ID
-          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
-    steps:
-      - checkout
-      - run:
-          name: Run commands
-          command: |
-              pwd
-              
